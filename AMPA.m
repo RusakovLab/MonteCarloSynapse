@@ -8,11 +8,15 @@ function dy = AMPA(t, y, f, ft, TimeControl)
 %   - Destexhe et al. (1996)
 %
 % States:
-%      O
-%      |
+%           O
+%           |
 % C0 - C1 - C2
 %      |    |
 %      D1   D2
+%
+% Topology (from the equations below): C0<->C1<->C2; C1<->D1; C2<->D2; C2<->O.
+% The open state O opens from the doubly-bound C2 (dy(6)=Ro*y(3)-Rc*y(6)),
+% NOT from C1.
 %
 % State variables: y = [C0, C1, C2, D1, D2, O]
 %
@@ -21,20 +25,13 @@ function dy = AMPA(t, y, f, ft, TimeControl)
 %   y  - State vector (6 elements, fractions must sum to 1)
 %   f  - Glutamate concentration time series (mM)
 %   ft - Time points for glutamate concentration (ms)
-%   Optional Name-Value pairs:
-%     'Normalize' - Normalize derivatives (default: true)
-%     'Rates'     - Custom rate constants structure
+%   TimeControl - Integration horizon / time-control parameter (ms)
 %
 % Output:
-%   dy - Derivatives of state variables
+%   dy - Derivatives of state variables (6x1 column vector)
 %
 % Example:
-%   % Basic usage
-%   [t,y] = ode45(@(t,y) AMPA_Receptor_Kinetics(t,y,f,ft), tspan, y0);
-%
-%   % With custom rates
-%   customRates.Rb = 15;  % /mM/ms
-%   [t,y] = ode45(@(t,y) AMPA_Receptor_Kinetics(t,y,f,ft,'Rates',customRates), tspan, y0);
+%   [t,y] = ode45(@(t,y) AMPA(t,y,f,ft,TimeControl), tspan, y0);
 
 % Validate state vector
 if length(y) ~= 6
@@ -50,7 +47,7 @@ end
     
     % Rate constants from the original MOD file
     % Binding and unbinding rates
-    Rb  = 13;       % (/mM /ms): binding (diffusion limited)
+    Rb  = 13;       % (/uM /ms): binding (diffusion limited)
     Ru1 = 0.0059;   % (/ms)    : unbinding (1st site)
     Ru2 = 86;       % (/ms)    : unbinding (2nd site)
     
@@ -79,7 +76,7 @@ end
     dy(2) = NormParam * (rb * y(1) - (Ru1 + rb + Rd) * y(2) + Rr * y(4) + Ru2 * y(3));
     
     % dC2/dt: Double glutamate bound
-    dy(3) = NormParam * (rb * y(2) - (Ru2 + Rd + Ro + Rc) * y(3) + Rr * y(5));
+    dy(3) = NormParam * (rb * y(2) - (Ru2 + Rd + Ro) * y(3) + Rr * y(5) + Rc * y(6));
     
     % dD1/dt: Single glutamate bound, desensitized
     dy(4) = NormParam * (Rd * y(2) - Rr * y(4));
