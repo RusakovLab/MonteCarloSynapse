@@ -1,12 +1,15 @@
-function dy = AMPA(t, y, f, ft, TimeControl)
-% AMPA - Model of AMPA receptors kinetics
+function dy = AMPA1(t, y, f, ft, TimeControl)
+% AMPA1 - Model of AMPA receptors kinetics
 %
 % 6-state gating model (Raman and Trussell, Neuron 9:173-186, 1992)
-%      O1
-%      |
-% C -- C1 -- C2 -- O2
-%      |
-%      D
+%                 O1
+%                 |
+% C0 -- C1 -- C2 -- O2
+%                 |
+%                 D
+%
+% Topology (from the equations below): C0<->C1<->C2; and D, O1, O2 all
+% connect to the doubly-bound C2 (y(3)), NOT to C1.
 %
 % Input:
 %   t - time point
@@ -22,7 +25,7 @@ function dy = AMPA(t, y, f, ft, TimeControl)
     f = interp1(ft, f, t); % Interpolate the data set (ft, f) at times t
     
     % Rate constants from the MOD file
-    Rb  = 13;       % (/mM /ms) : binding (diffusion limited)
+    Rb  = 13;       % (/uM /ms) : binding (diffusion limited)
     Ru1 = 0.3;      % (/ms)     : unbinding (1st site)
     Ru2 = 200;      % (/ms)     : unbinding (2nd site)      
     Rd  = 30.0;     % (/ms)     : desensitization
@@ -32,11 +35,8 @@ function dy = AMPA(t, y, f, ft, TimeControl)
     Ro2 = 2;        % (/ms)     : opening (slow)
     Rc2 = 0.25;     % (/ms)     : closing
     
-    % Convert mM to μM for consistency with the NMDA model if needed
-    % (Rb is already in /mM/ms, so multiply by 1e-3 to convert from /μM/ms)
-    % rb = Rb * (1e-3) * f;
-    
-    % Or keep in mM as per the original MOD file:
+    % Glutamate f is in mM and Rb is in /mM/ms, so rb = Rb*f has units /ms.
+    % (To instead pass f in μM, rescale: rb = Rb*1e-3*f, i.e. Rb in /μM/ms.)
     rb = Rb * f;
     
     % Initialize derivatives vector
