@@ -1,13 +1,9 @@
 
-# NatureComm
+# NatureComm 
 ## Computational Model of Glutamate Diffusion and Receptor Activation
-
-# NatureComm
-## Computational Model of Glutamate Diffusion and Receptor Activation
-
+[![Windows 11](https://img.shields.io/badge/MATLAB-2022b-blue.svg)](https://uk.mathworks.com/products/matlab.html)
 [![MATLAB 2022b](https://img.shields.io/badge/MATLAB-2022b-blue.svg)](https://uk.mathworks.com/products/matlab.html)
-[![Windows](https://img.shields.io/badge/OS-Windows-blue.svg)](https://www.microsoft.com/windows/)
-[![License](https://img.shields.io/badge/License-UCL-red.svg)](https://www.ucl.ac.uk/legal-services/licensing-and-intellectual-property)
+[![License](https://img.shields.io/badge/License-UCL-red.svg)](https://uk.mathworks.com/academia/tah-portal/university-college-london-649021.html)
 
 This repository provides MATLAB code for simulating the **diffusion of glutamate molecules** in the extracellular space and modeling the subsequent **activation of NMDA and AMPA receptors**. The simulations incorporate biophysically detailed kinetics, reflecting conditions of glutamate release from astrocytes and its interaction with cellular structures. These models support a study submitted to *Nature Communications*.
 
@@ -31,7 +27,7 @@ Execute `DiffusionGlutamateBalls.m` to simulate glutamate diffusion and adhesion
 * **`Balls distribution <timestamp>.txt`**: Contains the 3D coordinates and radii of the spherical obstacles, which represent astrocyte proxies.
 * **`DistanceFree <timestamp>.txt`**: Records the space-time distribution of free glutamate molecules in concentric bins.
 * **`DistanceBound <timestamp>.txt`**: Shows the space-time distribution of glutamate molecules adhered to obstacles.
-* **`PD 0.1 ms <timestamp>.txt`**, **`PD 0.3 ms <timestamp>.txt`**, **`PD 1 ms <timestamp>.txt`**, **`PD 3 ms <timestamp>.txt`**: These files provide the coordinates of all glutamate molecules at specific time points (0.1 ms, 0.3 ms, 1 ms, and 3 ms). The last column indicates whether the molecule is free (0) or bound (1).
+* **`PD 0.1 ms <timestamp>.txt`**, **`PD 0.3 ms <timestamp>.txt`**, **`PD 1 ms <timestamp>.txt`**, **`PD 3 ms <timestamp>.txt`**: These files provide the coordinates of all glutamate molecules at specific time points. The last column indicates whether the molecule is free (0) or bound (1).
 
 These output files offer a comprehensive view of glutamate movement and interaction in both space and time, serving as crucial input for the subsequent receptor models.
 
@@ -45,44 +41,7 @@ Simulate NMDA receptor kinetics in response to the generated glutamate profiles 
 
 ```matlab
 NMDA_SpaceSR.m
-
-This repository provides MATLAB code for simulating the **diffusion of glutamate molecules** in the extracellular space and modeling the subsequent **activation of NMDA and AMPA receptors**. The simulations incorporate biophysically detailed kinetics, reflecting conditions of glutamate release from astrocytes and its interaction with cellular structures. These models support a study submitted to *Nature Communications*.
-
----
-
-## Workflow
-
-### 1. Configure Parameters
-
-Before running simulations, adjust the following files to match your experimental setup:
-
-* `InputParametersSR.m`: Defines simulation parameters such as domain size, release volume, and particle count.
-* `statisticSR.txt`: Sets statistical parameters like the number of trials and adhesion probabilities.
-
----
-
-### 2. Run Glutamate Diffusion Simulation
-
-Execute `DiffusionGlutamateBalls.m` to simulate glutamate diffusion and adhesion within a 3D extracellular environment. This script generates several output files in your working directory, each providing different insights into the simulation results:
-
-* **`Balls distribution <timestamp>.txt`**: Contains the 3D coordinates and radii of the spherical obstacles, which represent astrocyte proxies.
-* **`DistanceFree <timestamp>.txt`**: Records the space-time distribution of free glutamate molecules in concentric bins.
-* **`DistanceBound <timestamp>.txt`**: Shows the space-time distribution of glutamate molecules adhered to obstacles.
-* **`PD 0.1 ms <timestamp>.txt`**, **`PD 0.3 ms <timestamp>.txt`**, **`PD 1 ms <timestamp>.txt`**, **`PD 3 ms <timestamp>.txt`**: These files provide the coordinates of all glutamate molecules at specific time points (0.1 ms, 0.3 ms, 1 ms, and 3 ms). The last column indicates whether the molecule is free (0) or bound (1).
-
-These output files offer a comprehensive view of glutamate movement and interaction in both space and time, serving as crucial input for the subsequent receptor models.
-
----
-
-### 3. Compute Receptor Activation Dynamics
-
-#### NMDA Receptors
-
-Simulate NMDA receptor kinetics in response to the generated glutamate profiles by running:
-
-```matlab
-NMDA_SpaceSR.m
-```
+````
 
 #### AMPA Receptors (Unified Interface)
 
@@ -94,18 +53,18 @@ RunAmpa.m
 
 This script calls `Unified_AMPA_SpaceSR.m`, which supports multiple AMPA receptor models:
 
-| Model Name       | Files    | Description                                   |
-| :--------------- | :------- | :-------------------------------------------- |
-| Patneau–Mayer    | `AMPA.m` | 6-state model (Neuron 1991, Destexhe 1996)    |
-| Raman–Trussell   | `AMPA1.m` | Dual-open-state model (Neuron 1992)           |
-| GluR1-based      | `AMPA2.m` | 12-state model with multiple ligand bindings |
+| Model Name     | Files     | Description                                  |
+| :------------- | :-------- | :------------------------------------------- |
+| Patneau–Mayer  | `AMPA.m`  | 6-state model (Neuron 1991, Destexhe 1996)   |
+| Raman–Trussell | `AMPA1.m` | Dual-open-state model (Neuron 1992)          |
+| GluR1-based    | `AMPA2.m` | 12-state model with multiple ligand bindings |
 
 To select the glutamate source (free or bound molecules) for AMPA simulations, modify the `filePattern` variable within `Unified_AMPA_SpaceSR.m`:
 
 ```matlab
 filePattern = fullfile(myFolder, 'DistanceFree*.txt');  % for free molecules
 % or
-filePattern = full(myFolder, 'DistanceBound*.txt'); % for adhered molecules
+filePattern = fullfile(myFolder, 'DistanceBound*.txt'); % for adhered molecules
 ```
 
 ---
@@ -128,15 +87,18 @@ PlotDataControl.m
 ## Included Files
 
 ### Diffusion
+
 * `DiffusionGlutamateBalls.m`
 * `InputParametersSR.m`
 * `statisticSR.txt`
 
 ### NMDA Model
+
 * `NMDA.m`
 * `NMDA_SpaceSR.m`
 
 ### AMPA Models
+
 * `AMPA.m` – Patneau–Mayer
 * `AMPA1.m` – Raman–Trussell
 * `AMPA2.m` – GluR1 multistate
@@ -144,9 +106,11 @@ PlotDataControl.m
 * `RunAmpa.m` – Unified entry point
 
 ### Visualization
+
 * `PlotDataControl.m`
 
 ### Example Output Files
+
 * `Balls distribution *.txt`
 * `DistanceFree *.txt`
 * `DistanceBound *.txt`
@@ -157,21 +121,43 @@ PlotDataControl.m
 
 ---
 
+## Performance Benchmarks
+
+Estimated run times for different configurations:
+
+| Platform                      | Task                   | Particle Count (`N`) | Time Required |
+| ----------------------------- | ---------------------- | -------------------- | ------------- |
+| Local PC (i9-12900K, 16C/24T) | Demo executable        | 100 particles        | \~20 minutes  |
+| Local PC (i9-12900K, 16C/24T) | Full MATLAB simulation | 5000 particles       | \~8 hours     |
+| UCL High-Performance Cluster  | Full MATLAB simulation | 5000 particles       | \~2 hours     |
+
+> Performance depends on CPU speed, memory bandwidth, and MATLAB's internal multithreading.
+
+---
+
 ## Run Without MATLAB
 
 A standalone version of the glutamate diffusion simulator is provided in the `Demo/` folder.
 
 **Files:**
+
 * `DiffusionGlutamateBalls.exe`: Precompiled executable.
 * `MATLAB_Runtime_R2022b_Update_10_win64.zip`: Required MATLAB Runtime.
 
 **Instructions:**
-1.  Unzip and install the MATLAB Runtime (run `setup.exe`).
-2.  Execute `DiffusionGlutamateBalls.exe` to launch the simulation.
+
+1. Unzip and install the MATLAB Runtime (run `setup.exe`).
+2. Execute `DiffusionGlutamateBalls.exe` to launch the simulation.
 
 ---
 
 ## Citation
 
 If you use this code in your research, please cite the associated paper submitted to *Nature Communications*.
+
+```
+
+---
+
+Let me know if you'd like to add badges for cluster usage, or link directly to the UCL HPC service page.
 ```
