@@ -1,8 +1,4 @@
-Absolutely! Adding a badge for MATLAB 2022b is a nice touch. For a license badge, it's common to state the type of license (e.g., MIT, Apache 2.0). Since your project is associated with UCL and a Nature Communications paper, you might not have an open-source license defined yet. I'll add a placeholder that indicates it's under "Proprietary" or "UCL License" for now, and you can change it if you decide on a specific open-source license later.
 
-Here's the updated `README.md` with the badges at the top:
-
-```markdown
 # NatureComm
 ## Computational Model of Glutamate Diffusion and Receptor Activation
 
