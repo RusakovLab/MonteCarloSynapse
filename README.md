@@ -6,8 +6,6 @@
 
 This repository contains MATLAB code to simulate **glutamate diffusion in the extracellular space** and the subsequent **activation of NMDA and AMPA receptors**, incorporating biophysically realistic kinetics. The models support a study submitted to *Nature Communications*.
 
----
-
 ## 1. System Requirements
 
 - **Operating System:** Windows 10/11 (64-bit recommended)
@@ -126,10 +124,10 @@ To reproduce quantitative results from the manuscript:
 
 1. Run `DiffusionGlutamateBalls.m` with:
 
-   * `N = 5000`, `TimeSteps = 1000`
+   * `N = 1000 and 5000`
 2. Simulate receptor activation with:
-
    * `RunAmpa.m` or `NMDA_SpaceSR.m`
+   * Test data located in https://github.com/RusakovLab/NatureComm/tree/main/DataforAMPAandNMDATesting
 3. Compare results using:
 
    * `PlotDataControl.m` and visual output scripts embedded in `*_SpaceSR.m`
@@ -147,11 +145,6 @@ If you use this code, please cite the associated paper submitted to *Nature Comm
 ## Repository
 
 📦 GitHub: [https://github.com/RusakovLab/NatureComm](https://github.com/RusakovLab/NatureComm)
-📄 Corresponding author: Lesha Savchenko (UCL Institute of Neurology)
+📄 Corresponding author: Leonid Savchenko (UCL Institute of Neurology)
 
-```
 
----
-
-Let me know if you want me to generate a `LICENSE` file or a zipped version of the entire structure for submission.
-```
