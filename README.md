@@ -126,7 +126,7 @@ Note that each `*_SpaceSR.m` script automatically generates plots of receptor st
 
 ## 5. License
 
-This software is provided under the **University College London academic use license**. For use beyond academic or research purposes, please contact the author.
+This MATLAB is used under the **University College London academic use license**. 
 
 ---
 
