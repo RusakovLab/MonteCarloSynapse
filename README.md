@@ -95,6 +95,7 @@ Use this script to run all AMPA receptor models:
 
 ```matlab
 RunAmpa.m
+Unified_AMPA_SpaceSR.m
 ```
 
 This script calls `Unified_AMPA_SpaceSR.m`, supporting three kinetic models:
