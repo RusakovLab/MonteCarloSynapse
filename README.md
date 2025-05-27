@@ -3,7 +3,7 @@
 ## Computational Model of Glutamate Diffusion and Receptor Activation
 
 [![MATLAB 2022b](https://img.shields.io/badge/MATLAB-2022b-blue.svg)](https://uk.mathworks.com/products/matlab.html)
-[![License](https://img.shields.io/badge/License-UCL-red.svg)](https://www.ucl.ac.uk/legal-services/licensing-and-intellectual-property)
+[![License](https://img.shields.io/badge/License-UCL-red.svg)][(https://uk.mathworks.com/academia/tah-portal/university-college-london-649021.html)]
 
 This repository provides MATLAB code for simulating the **diffusion of glutamate molecules** in the extracellular space and modeling the subsequent **activation of NMDA and AMPA receptors**. The simulations incorporate biophysically detailed kinetics, reflecting conditions of glutamate release from astrocytes and its interaction with cellular structures. These models support a study submitted to *Nature Communications*.
 
