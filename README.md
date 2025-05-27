@@ -1,6 +1,3 @@
-
-
-```markdown
 # NatureComm
 Computational Model of Glutamate Diffusion and Receptor Activation
 
