@@ -10,7 +10,7 @@ The model captures the release of glutamate from astrocytes, diffusion through a
 ## Components
 
 ### Glutamate Diffusion
-- **`FixBallsAstrogliaSurfaceRelease.m`**: Simulates 3D Brownian motion of glutamate among spherical obstacles representing astrocytes, including adhesion effects.
+- **`DiffusionGlutamateBalls.m`**: Simulates 3D Brownian motion of glutamate among spherical obstacles representing astrocytes, including adhesion effects.
 - **`InputParametersSR.m`**: Sets simulation parameters (particle number, domain size, surface properties).
 - **`statisticSR.txt`**: Contains statistical settings like adhesion probability and number of trials.
 
