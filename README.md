@@ -2,8 +2,49 @@
 # NatureComm
 ## Computational Model of Glutamate Diffusion and Receptor Activation
 
+# NatureComm
+## Computational Model of Glutamate Diffusion and Receptor Activation
+
 [![MATLAB 2022b](https://img.shields.io/badge/MATLAB-2022b-blue.svg)](https://uk.mathworks.com/products/matlab.html)
-[![License](https://img.shields.io/badge/License-UCL-red.svg)](https://uk.mathworks.com/academia/tah-portal/university-college-london-649021.html)
+[![Windows](https://img.shields.io/badge/OS-Windows-blue.svg)](https://www.microsoft.com/windows/)
+[![License](https://img.shields.io/badge/License-UCL-red.svg)](https://www.ucl.ac.uk/legal-services/licensing-and-intellectual-property)
+
+This repository provides MATLAB code for simulating the **diffusion of glutamate molecules** in the extracellular space and modeling the subsequent **activation of NMDA and AMPA receptors**. The simulations incorporate biophysically detailed kinetics, reflecting conditions of glutamate release from astrocytes and its interaction with cellular structures. These models support a study submitted to *Nature Communications*.
+
+---
+
+## Workflow
+
+### 1. Configure Parameters
+
+Before running simulations, adjust the following files to match your experimental setup:
+
+* `InputParametersSR.m`: Defines simulation parameters such as domain size, release volume, and particle count.
+* `statisticSR.txt`: Sets statistical parameters like the number of trials and adhesion probabilities.
+
+---
+
+### 2. Run Glutamate Diffusion Simulation
+
+Execute `DiffusionGlutamateBalls.m` to simulate glutamate diffusion and adhesion within a 3D extracellular environment. This script generates several output files in your working directory, each providing different insights into the simulation results:
+
+* **`Balls distribution <timestamp>.txt`**: Contains the 3D coordinates and radii of the spherical obstacles, which represent astrocyte proxies.
+* **`DistanceFree <timestamp>.txt`**: Records the space-time distribution of free glutamate molecules in concentric bins.
+* **`DistanceBound <timestamp>.txt`**: Shows the space-time distribution of glutamate molecules adhered to obstacles.
+* **`PD 0.1 ms <timestamp>.txt`**, **`PD 0.3 ms <timestamp>.txt`**, **`PD 1 ms <timestamp>.txt`**, **`PD 3 ms <timestamp>.txt`**: These files provide the coordinates of all glutamate molecules at specific time points (0.1 ms, 0.3 ms, 1 ms, and 3 ms). The last column indicates whether the molecule is free (0) or bound (1).
+
+These output files offer a comprehensive view of glutamate movement and interaction in both space and time, serving as crucial input for the subsequent receptor models.
+
+---
+
+### 3. Compute Receptor Activation Dynamics
+
+#### NMDA Receptors
+
+Simulate NMDA receptor kinetics in response to the generated glutamate profiles by running:
+
+```matlab
+NMDA_SpaceSR.m
 
 This repository provides MATLAB code for simulating the **diffusion of glutamate molecules** in the extracellular space and modeling the subsequent **activation of NMDA and AMPA receptors**. The simulations incorporate biophysically detailed kinetics, reflecting conditions of glutamate release from astrocytes and its interaction with cellular structures. These models support a study submitted to *Nature Communications*.
 
