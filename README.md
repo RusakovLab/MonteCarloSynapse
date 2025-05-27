@@ -134,7 +134,7 @@ This MATLAB is used under the **University College London academic use license**
 
 To reproduce the quantitative results from the submitted manuscript:
 
-1.  Run `DiffusionGlutamateBalls.m` with particle counts of `N = 1000` and `N = 5000`.
+1.  Run DiffusionGlutamateBalls.m using particle counts of N = 1000 and N = 5000, specified in the **statisticSR.txt** file along with the astrocyte density probability (ProbabilityofAstrocytes = 0.1).
 2.  Simulate receptor activation using `RunAmpa.m` or `NMDA_SpaceSR.m`. Test data can be found in the `DataforAMPAandNMDATesting` folder on the GitHub repository.
 3.  Compare your results using `PlotDataControl.m` and the visual output scripts embedded in `*_SpaceSR.m`.
 
