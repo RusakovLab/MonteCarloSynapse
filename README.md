@@ -3,101 +3,148 @@ Computational Model of Glutamate Diffusion and Receptor Activation
 
 ## Overview
 
-This repository contains MATLAB code and associated files used for simulating glutamate diffusion in the extracellular space and its interaction with both NMDA and AMPA receptors. The results support a study submitted to *Nature Communications*.
+This repository provides MATLAB code for simulating glutamate diffusion in the extracellular space and modeling activation of NMDA and AMPA receptors. The model supports a study submitted to *Nature Communications*.
 
-The model captures the release of glutamate from astrocytes, diffusion through a 3D domain filled with cellular structures, and subsequent receptor activation using detailed biophysical kinetics.
+The simulation captures glutamate release from astrocytes, diffusion among cellular obstacles, and receptor activation using kinetic models.
 
-## Components
+---
 
-### Glutamate Diffusion
-- **`DiffusionGlutamateBalls.m`**: Simulates 3D Brownian motion of glutamate among spherical obstacles representing astrocytes, including adhesion effects.
-- **`InputParametersSR.m`**: Sets simulation parameters (particle number, domain size, surface properties).
-- **`statisticSR.txt`**: Contains statistical settings like adhesion probability and number of trials.
+## Installation & Requirements
 
-## Generating Input for AMPA/NMDA Dynamics
+- MATLAB R2022b (or compatible version)
+- Alternatively: Use the standalone demo executable (see below)
 
-The `DiffusionGlutamateBalls.m` script outputs text files that describe the spatial distribution of glutamate molecules over time. These files serve as input for AMPA and NMDA receptor dynamics simulations.
+---
 
-### Output Files:
-- **`DistanceFree*.txt`**: Records the number of free glutamate molecules in space over time.
-- **`DistanceBound*.txt`**: Records the number of glutamate molecules adhered to astrocytic surfaces.
+## Simulation Workflow
 
-Each file is timestamped automatically (e.g., `DistanceFree 24-Jun-2023 13-07-44.txt`) to prevent overwriting.
+### Step 1: Configure Parameters
+Edit the following files to match your experimental setup:
+- `InputParametersSR.m`: Defines simulation parameters (e.g., number of glutamate molecules, spatial domain).
+- `statisticSR.txt`: Sets statistical properties like adhesion probability and number of trials.
 
-### How to Use These Files:
-1. **Run** `DiffusionGlutamateBalls.m` to generate `DistanceFree*` and `DistanceBound*` data files.
-2. **Copy** the appropriate AMPA or NMDA `*_SpaceSR.m` file (e.g., `AMPA2_SpaceSR.m`) into the same directory as the generated `Distance*` files.
-3. **Modify file selection pattern** (if needed) in the space script. For example, by default:
-   filePattern = fullfile(myFolder, 'DistanceFree*.txt');
-   To analyze adhered molecules, change it to:
-   filePattern = fullfile(myFolder, 'DistanceBound*.txt');
+### Step 2: Run Diffusion Simulation
+Execute:
 
+```matlab
+DiffusionGlutamateBalls.m
+````
 
-Run the *_SpaceSR.m script to compute AMPA or NMDA receptor dynamics using the spatial glutamate profile as input.
-Make sure the Distance* files are not renamed arbitrarily—pattern matching in the script depends on the filename prefix (DistanceFree or DistanceBound).
-### NMDA Receptor Dynamics
-- **`NMDA.m`**, **`NMDA_SpaceSR.m`**: Implement kinetic models of NMDA receptor activation, including desensitization and glutamate-triggered transitions.
+This simulates glutamate release and 3D diffusion among astrocytic structures using Brownian motion with optional adhesion.
 
-### AMPA Receptor Dynamics *(NEW)*
-The following six files simulate AMPA receptor kinetics under different biophysical scenarios and kinetic schemes:
+### Output:
 
-- **`AMPA.m`**, **`AMPA_SpaceSR.m`**: Implements a 6-state model from Patneau & Mayer (Neuron, 1991) and Destexhe et al. (1996). Used to assess desensitization and open probability across distances.
-- **`AMPA1.m`**, **`AMPA1_SpaceSR.m`**: Implements an alternative AMPA model based on Raman & Trussell (Neuron, 1992), with dual open states and fast desensitization.
-- **`AMPA2.m`**, **`AMPA2_SpaceSR.m`**: A more detailed multistate GluR1-based AMPA model with 12 dynamic states capturing multiple ligand-bound, open, and desensitized configurations.
+This script creates two sets of time-stamped files:
 
-Each `*_SpaceSR.m` script processes glutamate distributions and numerically solves the receptor kinetics using `ode45`, outputting receptor states over time and distance.
+* `DistanceFree*.txt`: Free glutamate molecules over space and time
+* `DistanceBound*.txt`: Adhered glutamate molecules on astrocytic surfaces
 
-### Visualization
-- **`PlotDataControl.m`**: Plots 3D glutamate distributions and NMDA receptor states.
-- AMPA scripts generate additional plots (contour, line) showing receptor open probabilities and desensitization over time and space.
+These files serve as input for receptor simulations.
 
-## Usage
+---
 
-1. **Parameter Setup**
-   - Edit `InputParametersSR.m` and `statisticSR.txt` for diffusion parameters.
-   - Define glutamate distributions as `DistanceFree*.txt` in the working directory.
+## Step 3: Receptor Activation Dynamics
 
-2. **Run Diffusion Simulation**
-   - Execute `FixBallsAstrogliaSurfaceRelease.m` to simulate glutamate release and space sampling.
+Copy the desired `*_SpaceSR.m` script into the directory containing the `DistanceFree*` or `DistanceBound*` files. You can choose which type of glutamate interaction to analyze:
 
-3. **Receptor Activation Modeling**
-   - For NMDA: Run `NMDA_SpaceSR.m`.
-   - For AMPA:
-     - Use `AMPA_SpaceSR.m` (Patneau-Mayer model)
-     - Use `AMPA1_SpaceSR.m` (Raman-Trussell model)
-     - Use `AMPA2_SpaceSR.m` (GluR1 multistate model)
+### To analyze free glutamate:
 
-4. **Visualization**
-   - Use built-in figures in each script or run `PlotDataControl.m` to visualize receptor states and glutamate fields.
+```matlab
+filePattern = fullfile(myFolder, 'DistanceFree*.txt');
+```
+
+### To analyze adhered glutamate:
+
+```matlab
+filePattern = fullfile(myFolder, 'DistanceBound*.txt');
+```
+
+Then, run the corresponding script:
+
+#### NMDA Receptor Activation
+
+* `NMDA.m` — kinetic model definition
+* `NMDA_SpaceSR.m` — processes spatial glutamate input
+
+#### AMPA Receptor Activation (NEW)
+
+Three AMPA models are provided:
+
+| Model          | Kinetics Source                | Files                        |
+| -------------- | ------------------------------ | ---------------------------- |
+| Patneau-Mayer  | Neuron 1991 / Destexhe 1996    | `AMPA.m`, `AMPA_SpaceSR.m`   |
+| Raman-Trussell | Neuron 1992                    | `AMPA1.m`, `AMPA1_SpaceSR.m` |
+| GluR1-based    | Multistate AMPA with 12 states | `AMPA2.m`, `AMPA2_SpaceSR.m` |
+
+Each `*_SpaceSR.m` script numerically solves the receptor kinetics using `ode45`, and outputs time- and distance-resolved receptor state variables.
+
+---
+
+## Step 4: Visualization
+
+* Use figures auto-generated by `*_SpaceSR.m` scripts
+* Or run:
+
+  ```matlab
+  PlotDataControl.m
+  ```
+
+  to visualize 3D glutamate distributions and NMDA receptor states.
+
+---
 
 ## Included Files
 
-- `FixBallsAstrogliaSurfaceRelease.m`
-- `InputParametersSR.m`
-- `statisticSR.txt`
-- `NMDA.m`, `NMDA_SpaceSR.m`
-- `AMPA.m`, `AMPA_SpaceSR.m`
-- `AMPA1.m`, `AMPA1_SpaceSR.m`
-- `AMPA2.m`, `AMPA2_SpaceSR.m`
-- `PlotDataControl.m`
+### Diffusion
+
+* `DiffusionGlutamateBalls.m`
+* `InputParametersSR.m`
+* `statisticSR.txt`
+
+### NMDA
+
+* `NMDA.m`
+* `NMDA_SpaceSR.m`
+
+### AMPA (3 Models)
+
+* `AMPA.m`, `AMPA_SpaceSR.m`
+* `AMPA1.m`, `AMPA1_SpaceSR.m`
+* `AMPA2.m`, `AMPA2_SpaceSR.m`
+
+### Visualization
+
+* `PlotDataControl.m`
+
+---
+
 ## Demo for Non-MATLAB Users
 
-If you do not have MATLAB R2022b installed, you can still run a precompiled version of the glutamate diffusion simulation using the standalone executable provided in the `DEMO` directory.
+For users without MATLAB, a compiled Windows executable is provided in the `DEMO/` directory.
 
-### Steps:
+### Files:
 
-1. Download and install the free [MATLAB Runtime R2022b Update 10](https://www.mathworks.com/products/compiler/matlab-runtime.html) or use the included ZIP:
-   - Unzip `MATLAB_Runtime_R2022b_Update_10_win64.zip`
-   - Run `setup.exe` and follow the installation instructions
+* `DiffusionGlutamateBalls.exe`: Standalone simulation executable
+* `MATLAB_Runtime_R2022b_Update_10_win64.zip`: MATLAB Runtime environment
 
-2. After installation, run the executable:
-   - Double-click `DiffusionGlutamateBalls.exe` in the `DEMO` folder
-   - If prompted, allow permissions and wait for the simulation to launch
+### How to Run:
 
-3. The simulation will run automatically and display results upon completion.
+1. **Install MATLAB Runtime**:
+
+   * Unzip `MATLAB_Runtime_R2022b_Update_10_win64.zip`
+   * Run `setup.exe` and follow installation steps
+
+2. **Run Simulation**:
+
+   * Double-click `DiffusionGlutamateBalls.exe`
+   * The simulation will launch and run automatically
+
+---
 
 ## Citation
 
 If you use this code in your research, please cite the associated paper submitted to *Nature Communications*.
-```
+
+---
+
 
