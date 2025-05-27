@@ -2,7 +2,7 @@
 
 [![MATLAB 2022b](https://img.shields.io/badge/MATLAB-2022b-blue.svg)](https://uk.mathworks.com/products/matlab.html)
 [![Windows](https://img.shields.io/badge/OS-Windows-blue.svg)](https://www.microsoft.com/windows/)
-[![License](https://img.shields.io/badge/License-UCL-red.svg)][(https://www.ucl.ac.uk/legal-services/licensing-and-intellectual-property)](https://uk.mathworks.com/academia/tah-portal/university-college-london-649021.html)
+[![License](https://img.shields.io/badge/License-UCL-red.svg)](https://www.ucl.ac.uk/legal-services/licensing-and-intellectual-property)](https://uk.mathworks.com/academia/tah-portal/university-college-london-649021.html)
 
 > **Computational model for simulating glutamate diffusion in extracellular space and subsequent NMDA/AMPA receptor activation with biophysically realistic kinetics.**
 
