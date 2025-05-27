@@ -1,150 +1,153 @@
 
-# NatureComm  
-## Computational Model of Glutamate Diffusion and Receptor Activation  
-[![MATLAB 2022b](https://img.shields.io/badge/MATLAB-2022b-blue.svg)](https://uk.mathworks.com/products/matlab.html)  
-[![License](https://img.shields.io/badge/License-UCL-red.svg)](https://uk.mathworks.com/academia/tah-portal/university-college-london-649021.html)
+# NatureComm
+## Computational Model of Glutamate Diffusion and Receptor Activation
 
-This repository contains MATLAB code to simulate **glutamate diffusion in the extracellular space** and the subsequent **activation of NMDA and AMPA receptors**, incorporating biophysically realistic kinetics. The models support a study submitted to *Nature Communications*.
+[![MATLAB 2022b](https://img.shields.io/badge/MATLAB-2022b-blue.svg)](https://uk.mathworks.com/products/matlab.html)
+[![Windows](https://img.shields.io/badge/OS-Windows-blue.svg)](https://www.microsoft.com/windows/)
+[![License](https://img.shields.io/badge/License-UCL-red.svg)](https://www.ucl.ac.uk/legal-services/licensing-and-intellectual-property)
+
+This repository contains MATLAB code to simulate **glutamate diffusion** in the extracellular space and the subsequent **activation of NMDA and AMPA receptors**, incorporating biophysically realistic kinetics. The models support a study submitted to *Nature Communications*.
+
+---
 
 ## 1. System Requirements
 
-- **Operating System:** Windows 10/11 (64-bit recommended)
-- **MATLAB:** R2022b (required for running `.m` files)
-- **Processor (tested):**  
-  - Intel Core i9-12900K @ 3.2 GHz (16 Cores, 24 Threads)  
-  - UCL High-Performance Computing Cluster (Slurm)
-- **RAM:** 16 GB or more recommended
-- **Disk Space:** ~1 GB for full output set
+* **Operating System:** Windows 10/11 (64-bit recommended)
+* **MATLAB:** R2022b (required for `.m` files)
+* **Processor (tested):**
+    * Intel Core i9-12900K @ 3.2 GHz (16 Cores, 24 Threads)
+    * UCL High-Performance Computing Cluster (Slurm)
+* **RAM:** 16 GB or more recommended
+* **Disk Space:** ~1 GB for full output set
 
 ---
 
-## 2. Installation Guide
+## 2. Getting Started
 
-### MATLAB Users
+### For MATLAB Users
 
-1. Clone or download this repository.
-2. Open MATLAB R2022b.
-3. Add the main directory to your MATLAB path.
-4. Edit `InputParametersSR.m` and `statisticSR.txt` to set parameters.
+1.  **Clone** or download this repository.
+2.  Open **MATLAB R2022b**.
+3.  Add the main directory to your MATLAB path.
+4.  Edit `InputParametersSR.m` and `statisticSR.txt` to configure your simulation parameters.
 
-### Non-MATLAB Users (Demo Only)
+### For Non-MATLAB Users (Demo Only)
 
-1. Go to the `Demo/` directory.
-2. Unzip and install:
-   - `MATLAB_Runtime_R2022b_Update_10_win64.zip`
-   - Run `setup.exe` inside the ZIP.
-3. Launch:
-   - `DiffusionGlutamateBalls.exe`
-
----
-
-## 3. Demo
-
-The standalone executable `DiffusionGlutamateBalls.exe` demonstrates glutamate diffusion for 100 particles.
-
-### Runtime (Benchmark):
-| System                        | Task                | Particles | Time      |
-|------------------------------|---------------------|-----------|-----------|
-| Local PC (i9-12900K)         | Demo (EXE)          | 100       | ~20 mins  |
-| Local PC (i9-12900K)         | Full MATLAB Sim     | 5000      | ~8 hours  |
-| UCL HPC Cluster              | Full MATLAB Sim     | 5000      | ~2 hours  |
+1.  Navigate to the `Demo/` directory.
+2.  Unzip and install the **MATLAB Runtime R2022b**:
+    * `MATLAB_Runtime_R2022b_Update_10_win64.zip`
+    * Run `setup.exe` inside the ZIP archive.
+3.  Launch `DiffusionGlutamateBalls.exe` to run the demo.
 
 ---
 
-## 4. Instructions for Use
+## 3. Demo Overview
 
-### Step 1: Configure Simulation
+The standalone executable `DiffusionGlutamateBalls.exe` provides a demonstration of glutamate diffusion for 100 particles.
 
-- `InputParametersSR.m`: Defines domain size, molecule count, release radius, etc.
-- `statisticSR.txt`: Defines number of trials and adhesion probabilities.
+### Estimated Runtimes
 
-### Step 2: Run Diffusion
+| System                  | Task              | Particles | Time      |
+| :---------------------- | :---------------- | :-------- | :-------- |
+| Local PC (i9-12900K)    | Demo (EXE)        | 100       | ~20 mins  |
+| Local PC (i9-12900K)    | Full MATLAB Sim   | 5000      | ~8 hours  |
+| UCL HPC Cluster (Slurm) | Full MATLAB Sim   | 5000      | ~2 hours  |
+
+---
+
+## 4. Usage Instructions
+
+### Step 1: Configure Simulation Parameters
+
+* **`InputParametersSR.m`**: Defines core simulation settings like domain size, molecule count, and release radius.
+* **`statisticSR.txt`**: Sets statistical parameters, including the number of trials and adhesion probabilities.
+
+### Step 2: Run Glutamate Diffusion
+
+Execute the primary diffusion simulation script:
 
 ```matlab
 DiffusionGlutamateBalls.m
-````
+```
 
-#### Output Files:
+This script generates the following output files in your working directory:
 
-| File Name                  | Description                                         |
-| -------------------------- | --------------------------------------------------- |
+| File Name                | Description                                         |
+| :----------------------- | :-------------------------------------------------- |
 | `Balls distribution *.txt` | Coordinates and radii of spherical obstacles        |
-| `DistanceFree *.txt`       | Free glutamate distribution over space and time     |
-| `DistanceBound *.txt`      | Adhesion-bound glutamate distribution               |
-| `PD 0.1/0.3/1/3 ms *.txt`  | Molecular positions at different times (bound/free) |
+| `DistanceFree *.txt`     | Space-time distribution of free glutamate           |
+| `DistanceBound *.txt`    | Space-time distribution of adhesion-bound glutamate |
+| `PD 0.1/0.3/1/3 ms *.txt` | Molecular positions at specific times (0=free, 1=bound) |
 
-### Step 3: Receptor Dynamics
+### Step 3: Simulate Receptor Dynamics
 
-#### NMDA Activation
+#### NMDA Receptor Activation
+
+Run the following script to simulate NMDA receptor kinetics:
 
 ```matlab
 NMDA_SpaceSR.m
 ```
 
-#### AMPA Activation (Unified)
+#### AMPA Receptor Activation (Unified)
+
+Use this script to run all AMPA receptor models:
 
 ```matlab
 RunAmpa.m
 ```
 
-This calls `Unified_AMPA_SpaceSR.m` and supports 3 kinetic models:
+This script calls `Unified_AMPA_SpaceSR.m`, supporting three kinetic models:
 
-| Model          | File      | Description                          |
-| -------------- | --------- | ------------------------------------ |
-| Patneau-Mayer  | `AMPA.m`  | 6-state (Neuron 1991, Destexhe 1996) |
-| Raman-Trussell | `AMPA1.m` | Dual open state (Neuron 1992)        |
-| GluR1-based    | `AMPA2.m` | 12-state ligand model                |
+| Model          | File      | Description                            |
+| :------------- | :-------- | :------------------------------------- |
+| Patneau-Mayer  | `AMPA.m`  | 6-state model (Neuron 1991, Destexhe 1996) |
+| Raman-Trussell | `AMPA1.m` | Dual open-state model (Neuron 1992)    |
+| GluR1-based    | `AMPA2.m` | 12-state ligand binding model          |
 
-To switch between free vs bound glutamate:
+To switch between simulating with **free** versus **bound** glutamate molecules, modify the `filePattern` in `Unified_AMPA_SpaceSR.m`:
 
 ```matlab
-filePattern = fullfile(myFolder, 'DistanceFree*.txt');  % or DistanceBound
+filePattern = fullfile(myFolder, 'DistanceFree*.txt');  % Use 'DistanceBound*.txt' for adhered molecules
 ```
 
-### Step 4: Visualization
+### Step 4: Visualize Results
+
+For additional visualization of spatial glutamate fields and NMDA activation:
 
 ```matlab
 PlotDataControl.m
 ```
 
-Also, each `*_SpaceSR.m` script automatically plots receptor state maps and time series.
+Note that each `*_SpaceSR.m` script automatically generates plots of receptor state maps and time series.
 
 ---
 
 ## 5. License
 
-This software is provided under the **University College London academic use license**.
-For use beyond academic or research purposes, contact the author.
+This software is provided under the **University College London academic use license**. For use beyond academic or research purposes, please contact the author.
 
 ---
 
 ## 6. Reproducing Manuscript Results
 
-To reproduce quantitative results from the manuscript:
+To reproduce the quantitative results from the submitted manuscript:
 
-1. Run `DiffusionGlutamateBalls.m` with:
+1.  Run `DiffusionGlutamateBalls.m` with particle counts of `N = 1000` and `N = 5000`.
+2.  Simulate receptor activation using `RunAmpa.m` or `NMDA_SpaceSR.m`. Test data can be found in the `DataforAMPAandNMDATesting` folder on the GitHub repository.
+3.  Compare your results using `PlotDataControl.m` and the visual output scripts embedded in `*_SpaceSR.m`.
 
-   * `N = 1000 and 5000`
-2. Simulate receptor activation with:
-   * `RunAmpa.m` or `NMDA_SpaceSR.m`
-   * Test data located in https://github.com/RusakovLab/NatureComm/tree/main/DataforAMPAandNMDATesting
-3. Compare results using:
-
-   * `PlotDataControl.m` and visual output scripts embedded in `*_SpaceSR.m`
-
-All required simulation parameters and example outputs are included in the repository.
+All necessary simulation parameters and example outputs are included in this repository.
 
 ---
 
 ## Citation
 
-If you use this code, please cite the associated paper submitted to *Nature Communications*.
+If you use this code in your research, please cite the associated paper submitted to *Nature Communications*.
 
 ---
 
-## Repository
+## Repository & Contact
 
-📦 GitHub: [https://github.com/RusakovLab/NatureComm](https://github.com/RusakovLab/NatureComm)
-📄 Corresponding author: Leonid Savchenko (UCL Institute of Neurology)
-
-
+* **GitHub Repository:** [https://github.com/RusakovLab/NatureComm](https://github.com/RusakovLab/NatureComm)
+* **Corresponding Author:** Leonid Savchenko (UCL Institute of Neurology)
