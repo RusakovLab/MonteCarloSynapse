@@ -14,6 +14,27 @@ The model captures the release of glutamate from astrocytes, diffusion through a
 - **`InputParametersSR.m`**: Sets simulation parameters (particle number, domain size, surface properties).
 - **`statisticSR.txt`**: Contains statistical settings like adhesion probability and number of trials.
 
+## Generating Input for AMPA/NMDA Dynamics
+
+The `DiffusionGlutamateBalls.m` script outputs text files that describe the spatial distribution of glutamate molecules over time. These files serve as input for AMPA and NMDA receptor dynamics simulations.
+
+### Output Files:
+- **`DistanceFree*.txt`**: Records the number of free glutamate molecules in space over time.
+- **`DistanceBound*.txt`**: Records the number of glutamate molecules adhered to astrocytic surfaces.
+
+Each file is timestamped automatically (e.g., `DistanceFree 24-Jun-2023 13-07-44.txt`) to prevent overwriting.
+
+### How to Use These Files:
+1. **Run** `DiffusionGlutamateBalls.m` to generate `DistanceFree*` and `DistanceBound*` data files.
+2. **Copy** the appropriate AMPA or NMDA `*_SpaceSR.m` file (e.g., `AMPA2_SpaceSR.m`) into the same directory as the generated `Distance*` files.
+3. **Modify file selection pattern** (if needed) in the space script. For example, by default:
+   filePattern = fullfile(myFolder, 'DistanceFree*.txt');
+   To analyze adhered molecules, change it to:
+   filePattern = fullfile(myFolder, 'DistanceBound*.txt');
+
+
+Run the *_SpaceSR.m script to compute AMPA or NMDA receptor dynamics using the spatial glutamate profile as input.
+Make sure the Distance* files are not renamed arbitrarily—pattern matching in the script depends on the filename prefix (DistanceFree or DistanceBound).
 ### NMDA Receptor Dynamics
 - **`NMDA.m`**, **`NMDA_SpaceSR.m`**: Implement kinetic models of NMDA receptor activation, including desensitization and glutamate-triggered transitions.
 
@@ -59,8 +80,6 @@ Each `*_SpaceSR.m` script processes glutamate distributions and numerically solv
 - `AMPA1.m`, `AMPA1_SpaceSR.m`
 - `AMPA2.m`, `AMPA2_SpaceSR.m`
 - `PlotDataControl.m`
-
-  
 ## Demo for Non-MATLAB Users
 
 If you do not have MATLAB R2022b installed, you can still run a precompiled version of the glutamate diffusion simulation using the standalone executable provided in the `DEMO` directory.
