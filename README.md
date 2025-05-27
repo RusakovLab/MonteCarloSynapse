@@ -151,7 +151,7 @@ NatureComm/
 
 ## 📝 License
 
-This software is provided under the **University College London academic use license**. For commercial or non-academic use, please contact the corresponding author.
+This MATLAB 2022b was used under the **University College London academic use license**. 
 
 ## 📚 Citation
 
