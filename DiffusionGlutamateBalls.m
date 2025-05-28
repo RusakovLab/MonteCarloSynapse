@@ -414,37 +414,37 @@ disp(['Data saved to ' filename]);
                         end
                         CreatMatrixAverage = CreatMatrixAverage+TimeOutPercent;
                     end
-                    if (i == round(0.02*TotalTime/ComputationSet.GTimeStep))
-                      targetTime = round(0.02*TotalTime/ComputationSet.GTimeStep);
+                    if (i == round(0.01*TotalTime/ComputationSet.GTimeStep))
+                      targetTime = round(0.01*TotalTime/ComputationSet.GTimeStep);
                         StakNew=Stak(:,1);
                         StakNew(StakNew > 1) = 0;
                         A = [x_par(i,:);  y_par(i,:); z_par(i,:); StakNew'];
-                       Filename = sprintf('PD %.2f ms %s.txt', targetTime/1000, datetime('now','TimeZone','local','Format','d-MMM-y HH-mm-ss'));
+                       Filename = sprintf('PD 0.1 ms %s.txt', datetime('now','TimeZone','local','Format','d-MMM-y HH-mm-ss'));
                         fileID = fopen(Filename,'w');
                         %fprintf(fileID,'%10.5f %10.5f\n', InputPar);
                         fprintf(fileID,'%10.5f %10.5f %10.5f %10.0f \n', A);
                         fclose(fileID);
                     end
-                     if (i == round(0.05*TotalTime/ComputationSet.GTimeStep))
-                       targetTime = round(0.05*TotalTime/ComputationSet.GTimeStep);
+                     if (i == round(0.04*TotalTime/ComputationSet.GTimeStep))
+                       targetTime = round(0.04*TotalTime/ComputationSet.GTimeStep);
                    
                         StakNew=Stak(:,1);
                         StakNew(StakNew > 1) = 0;
                         A = [x_par(i,:);  y_par(i,:); z_par(i,:); StakNew'];
 
-                         Filename = sprintf('PD %.2f ms %s.txt', targetTime/1000, datetime('now','TimeZone','local','Format','d-MMM-y HH-mm-ss'));
+                         Filename = sprintf('PD 0.3 ms %s.txt', datetime('now','TimeZone','local','Format','d-MMM-y HH-mm-ss'));
                         fileID = fopen(Filename,'w');
                         %fprintf(fileID,'%10.5f %10.5f\n', InputPar);
                         fprintf(fileID,'%10.5f %10.5f %10.5f %10.0f \n', A);
                         fclose(fileID);
                     end
-                    if (i == round(0.15*TotalTime/ComputationSet.GTimeStep))
-                       targetTime = round(0.15*TotalTime/ComputationSet.GTimeStep);
+                    if (i == round(0.12*TotalTime/ComputationSet.GTimeStep))
+                       targetTime = round(0.12*TotalTime/ComputationSet.GTimeStep);
                         StakNew=Stak(:,1);
                         StakNew(StakNew > 1) = 0;
                         A = [x_par(i,:);  y_par(i,:); z_par(i,:); StakNew'];
 
-                         Filename = sprintf('PD %.2f ms %s.txt', targetTime/1000, datetime('now','TimeZone','local','Format','d-MMM-y HH-mm-ss'));
+                         Filename = sprintf('PD 1 ms %s.txt', datetime('now','TimeZone','local','Format','d-MMM-y HH-mm-ss'));
                         fileID = fopen(Filename,'w');
                         %fprintf(fileID,'%10.5f %10.5f\n', InputPar);
                         fprintf(fileID,'%10.5f %10.5f %10.5f %10.0f \n', A);
@@ -453,12 +453,12 @@ disp(['Data saved to ' filename]);
                     %                     Test= round(TotalTime/ComputationSet.GTimeStep)
                     %                     Test1=i
 
-                    if (i == round(0.46*TotalTime/ComputationSet.GTimeStep))
-                       targetTime = round(0.46*TotalTime/ComputationSet.GTimeStep);
+                    if (i == round(0.4*TotalTime/ComputationSet.GTimeStep))
+                       targetTime = round(0.4*TotalTime/ComputationSet.GTimeStep);
                         StakNew=Stak(:,1);
                         StakNew(StakNew > 1) = 0;
                         A = [x_par(i,:);  y_par(i,:); z_par(i,:); StakNew'];
-                        Filename = sprintf('PD %.2f ms %s.txt', targetTime/1000, datetime('now','TimeZone','local','Format','d-MMM-y HH-mm-ss'));
+                        Filename = sprintf('PD 3 ms %s.txt',  datetime('now','TimeZone','local','Format','d-MMM-y HH-mm-ss'));
                         
                         fileID = fopen(Filename,'w');
                         %fprintf(fileID,'%10.5f %10.5f\n', InputPar);
