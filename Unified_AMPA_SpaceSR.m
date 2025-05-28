@@ -22,9 +22,9 @@ switch model_type
         ode_function = @AMPA1;
         initial_conditions = [1 0 0 0 0 0];
         desens_calc = @(Y) Y(:, 4);
-        open_calc = @(Y) Y(:, 6);
+         open_calc = @(Y) Y(:, 5)+Y(:, 6);
         desens_clim = [0, 0.4];
-        open_clim = [0, 0.03];
+        open_clim = [0, 0.5];
     case 'AMPA2'
         ode_function = @AMPA2;
         initial_conditions = [1 0 0 0 0 0 0 0 0 0 0 0];
