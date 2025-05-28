@@ -14,7 +14,7 @@ indProbabilityofAstrocytes = strncmpi('ProbabilityofAstrocytes',s{1},2);
 indNumbersphere = strncmpi('Numbersphere',s{1},2);
 indUnboundProb  = strncmpi('UnboundProb',s{1},2);
 
-% convert the parameters to the numerical value
+% Convert the parameters to numerical values
 np = s{2}(idxnp);                  % Number of particles
 Trials =  s{2}(idxTrials);
 MaxProbAdhesive = s{2}(indMaxProbAdhesive);
@@ -25,7 +25,7 @@ UnboundProb = s{2}(indUnboundProb);
 
 % ************************************************************************
 SizeCube.Size = 4000; %3400
-% Size of visualization area***********************************************
+% Size of visualisation area***********************************************
 SizeCube.AxisSize=SizeCube.Size/2;
 %***************************************************************************
 % Basic parameters
@@ -35,7 +35,7 @@ BasicParameters.SaveFiles = 'y';  % y is save files
 BasicParameters.NumberOfParticles = np;   % Number of p
 
 BasicParameters.charge = 0;                % Charge of particles
-BasicParameters.TotalTime = 8     ;       % Time of computation in ms 0.21
+BasicParameters.TotalTime = 8;       % Time of computation in ms 0.21
 BasicParameters.Numbersphere = Numbersphere; 
 BasicParameters.UnboundProb = UnboundProb;
 % 0.2	1400 26 January 2023
@@ -45,16 +45,16 @@ BasicParameters.UnboundProb = UnboundProb;
 BasicParameters.BeginTime = 0.8;            % Offset  to compute the diffusion coefficient in ms 0.015
 BasicParameters.EndTime = 0.9;              % End time to compute the diffusion coefficient in ms 0.02
 BasicParameters.Trials = Trials;                 % Number of Runs to compute the statistics
-BasicParameters.Control = 2;                % if Control ==1 the algorithm save into the file the final distribution of particles. At the end
+BasicParameters.Control = 2; % if Control ==1, the algorithm saves the final distribution of particles into the file. At the end
 
 
 % Parameters for Balls
 Balls.name = 'Balls';
 Balls.MaxBallRadius = 350.00; % Maximum radius 350
 Balls.MinBallRadius = 50.0;   % Minimum radius
-Balls.BettaControl = 0.8;     % Betta Control - normaly it is switch off
+Balls.BettaControl = 0.8;     % Betta Control - normally it is switched off
 Balls.OverlapingBalls = 'y';  % y is overlapping Balls
-Balls.ProbabilityofAstrocytes=ProbabilityofAstrocytes; % 0.1 proporsion of astro
+Balls.ProbabilityofAstrocytes=ProbabilityofAstrocytes; % 0.1 proportion of astro
 
 % *************************************************************************
 % Computational process parameters
@@ -67,9 +67,9 @@ ComputationSet.StepLocalMovement=0.1; % zero step-distance  fluctuation in propo
 % *************************************************************************
 % Geometrical parameters of the computational domain
 % Cleft parameters
-Cleft.RadiusofCleft= 0.00000100;
-Cleft.CleftWidth=0.000000010;
-Cleft.DistanceAstrocyte = 10; % Distance location of astrocytes centers from the cleft
+Cleft.RadiusofCleft= 100;
+Cleft.CleftWidth=10;
+Cleft.DistanceAstrocyte = 10; % Distance from the location of astrocyte centres to the cleft
 
 %**************************************************************************
 % Adhesion properties of astocytes
@@ -77,9 +77,9 @@ Adhesion.TimeOfDeAdhesion = 4; % time of detached from ball by ms
 %Adhesion.MaxProbAdhesive =0.3; %1 = instant adhesion 0 = non-adhesion
 Adhesion.MaxProbAdhesive =MaxProbAdhesive; %1 = instant adhesion 0 = non-adhesion
 Adhesion.TimeINsideAdhesiveZone =TimeINsideAdhesiveZone;
-%Adhesion.TimeINsideAdhesiveZone =0.001; % Number of steps to reach haft of maximum adgesen is TimeINsideAdhesiveZone/StepRad
+%Adhesion.TimeINsideAdhesiveZone =0.001; % Number of steps to reach half of the maximum adhesion is TimeINsideAdhesiveZone/StepRad
                                         % for 0.001 => 160 steps
-                                        % ms the constant of the time spent 
+                                        % ms is the constant of the time spent 
                                         % in the zone of the transporters necessary for the glutamate to bind to the transporters. 
                                         % The shorter the time, the better the connection.
 
