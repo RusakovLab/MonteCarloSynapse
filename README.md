@@ -1,4 +1,4 @@
-# NatureComm: Glutamate Diffusion and Receptor Activation Model
+# Glutamate Diffusion and Receptor Activation Model
 
 [![MATLAB 2022b](https://img.shields.io/badge/MATLAB-2022b-blue.svg)](https://uk.mathworks.com/products/matlab.html)
 [![Windows](https://img.shields.io/badge/OS-Windows-blue.svg)](https://www.microsoft.com/windows/)
