@@ -165,7 +165,7 @@ This repository supports a specific research publication. For questions or colla
 
 **Corresponding Author**: Leonid Savchenko  
 **Institution**: UCL Institute of Neurology  
-**Repository**: [https://github.com/RusakovLab/NatureComm](https://github.com/RusakovLab/NatureComm)
+**Repository**: [https://github.com/RusakovLabMonteCarloSynapse](https://github.com/RusakovLab/MonteCarloSynapse)
 
 ---
 
