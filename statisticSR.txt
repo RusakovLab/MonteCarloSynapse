@@ -1,8 +1,0 @@
-% location:
-   np = 5000
-   Trials=10
-   MaxProbAdhesive =1.0
-   TimeINsideAdhesiveZone =1.00 
-   ProbabilityofAstrocytes =0.1
-   Numbersphere = 1400;
-   UnboundProb = 0.0; % 1  unbound

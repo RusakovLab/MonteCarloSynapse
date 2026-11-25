@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "MonteCarloSynapse: Monte Carlo glutamate diffusion with AMPA/NMDA receptor kinetics"
+type: software
+authors:
+  - family-names: Savtchenko
+    given-names: Leonid P.
+    affiliation: "UCL Queen Square Institute of Neurology, London, UK"
+  - family-names: Rusakov
+    given-names: Dmitri A.
+    affiliation: "UCL Queen Square Institute of Neurology, London, UK"
+repository-code: "https://github.com/RusakovLab/MonteCarloSynapse"
+license: MIT
+version: 0.2.0
+# TODO: add the journal reference (preferred-citation) once the paper is accepted.

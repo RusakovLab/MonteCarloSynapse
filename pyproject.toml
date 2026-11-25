@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "montecarlosynapse"
+version = "0.2.0"
+description = "Monte Carlo glutamate diffusion in the extracellular space with AMPA/NMDA receptor kinetics"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Leonid P. Savtchenko" },
+    { name = "Dmitri A. Rusakov" },
+]
+keywords = ["neuroscience", "synapse", "glutamate", "diffusion", "NMDA", "AMPA", "Monte Carlo"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = [
+    "numpy>=1.23",
+    "scipy>=1.9",
+    "matplotlib>=3.6",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+video = ["imageio>=2.31", "imageio-ffmpeg>=0.4"]
+
+[project.urls]
+Repository = "https://github.com/RusakovLab/MonteCarloSynapse"
+
+[project.scripts]
+montecarlosynapse = "glutamate.cli:main"
+
+[tool.setuptools]
+packages = ["glutamate"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

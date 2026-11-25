@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+.venv/
+venv/
+env/
+
+# Testing / tooling
+.pytest_cache/
+.ipynb_checkpoints/
+.mypy_cache/
+.ruff_cache/
+
+# Simulation output (regenerate with run.py / gui.py)
+results/
+outputs/
+*.mp4
+*.gif
+DistanceFree*.txt
+DistanceBound*.txt
+Spillover*.txt
+Balls*.txt
+PD*ms*.txt
+SimulationMetadata*
+RunManifest.json
+Parameters.json
+
+# Local-only notes and machine-specific helpers (not part of the published code)
+recompute_prompt.md
+Find_Python.bat
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
